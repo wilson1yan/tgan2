@@ -19,10 +19,12 @@ def parse_args():
     parser.add_argument('-o', '--out', default='result.yml')
     parser.add_argument('--batchsize', type=int, default=5)
     parser.add_argument('--samples', type=str, required=True)
+    parser.add_argument('-a', '--attrs', nargs='*', default=())
     args = parser.parse_args()
 
-    conf_dicts = [yaml.load('conf/dset/ucf101_192x256.yml')]
-    config = make_config(conf_dicts, args.attrs)
+    with open('conf/dset/ucf101_192x256.yml', 'r') as f:
+        config = yaml.load(f)
+
     return config, args
 
 
